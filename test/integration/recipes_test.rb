@@ -32,9 +32,27 @@ class RecipesTest < ActionDispatch::IntegrationTest
   
   test "create new valid recipe" do
     get new_recipe_path
+    assert_template 'recipes/new'
+    name_of_recipe = "Chicken Tacos"
+    ingredients_of_recipe = "Chicken, Taco Shells, Sour Cream"
+    directions_of_recipe = "cook chicken with Taco seasoning, put in shell and top sour cream"
+    assert_difference 'Recipe.count', 1 do
+      post recipes_path, params: { recipe: { name: name_of_recipe, ingredients: ingredients_of_recipe, directions: directions_of_recipe }}
+    end
+    follow_redirect!
+    assert_match name_of_recipe.split.map { |i| i.capitalize }.join(' '), response.body
+    assert_match ingredients_of_recipe, response.body
+    assert_match directions_of_recipe, response.body
   end
   
   test "reject invalid recipe submissions" do
     get new_recipe_path
+    assert_template 'recipes/new'
+    assert_no_difference 'Recipe.count' do
+      post recipes_path, params: { recipe: { name: " ", ingredients: " ", directions: " " } }
+    end
+    assert_template 'recipes/new'
+    assert_select 'h2.panel-title'
+    assert_select 'div.panel-body'
   end
 end
