@@ -4,7 +4,7 @@ class RecipeTest < ActiveSupport::TestCase
 
   def setup
     @chef = Chef.create!(chefname: "Scott", email: "goyette@gmail.com")
-    @recipe = @chef.recipes.build(name: "vegetable", description: "great vegetable recipe") 
+    @recipe = @chef.recipes.build(name: "vegetable", directions: "great vegetable recipe", ingredients: "Test stuff") 
   end
   
   test "recipe without chef should be invalid" do
@@ -21,18 +21,33 @@ class RecipeTest < ActiveSupport::TestCase
     assert_not @recipe.valid?
   end
 
-  test "description should be present" do
-    @recipe.description = " "
+  test "ingrdients should be present" do
+    @recipe.ingredients = " "
     assert_not @recipe.valid?
   end
 
-  test "description shouldn't be less than 5 characters" do
-    @recipe.description = "a" * 3
+  test "directions should be present" do
+    @recipe.directions = " "
     assert_not @recipe.valid?
   end
 
-  test "description shouldn't be more than 500 characters" do
-    @recipe.description = "a" * 1501
+  test "ingredients shouldn't be less than 5 characters" do
+    @recipe.ingredients = "a" * 3
+    assert_not @recipe.valid?
+  end
+
+  test "directions shouldn't be less than 5 characters" do
+    @recipe.directions = "a" * 3
+    assert_not @recipe.valid?
+  end
+
+  test "ingrdients shouldn't be more than 1500 characters" do
+    @recipe.ingredients = "a" * 1501
+    assert_not @recipe.valid?
+  end
+
+  test "directions shouldn't be more than 1500 characters" do
+    @recipe.directions = "a" * 1501
     assert_not @recipe.valid?
   end
 end
