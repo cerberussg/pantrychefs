@@ -2,7 +2,9 @@ $navbar-default-bg: #EA7A33;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+html {
+  overflow-x: hidden;
+}
 .center {
   text-align: center;
 }
@@ -96,3 +98,10 @@ $navbar-default-bg: #EA7A33;
 .colormatch a {
   color: #EA7A33;
 }
+.recipe-actions {
+  padding-top: 5px;
+  a {
+    color: #fff;
+  }
+}
+
