@@ -4,7 +4,7 @@ class RecipesDeleteTest < ActionDispatch::IntegrationTest
   
   def setup
     @chef = Chef.create!(chefname: "Scott", email: "scott@yahoo.com",
-                        password: "Krsn@108", password_confirmation: "Krsn@108")
+                        password: "password", password_confirmation: "password")
     @recipe = Recipe.create(name: "Cookies", chef: @chef, ingredients: "Testing", directions: "Testing")
   end
   
