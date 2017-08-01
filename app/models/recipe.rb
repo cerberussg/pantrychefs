@@ -4,4 +4,5 @@ class Recipe < ApplicationRecord
   validates :directions, presence: true, length: { minimum: 5, maximum: 1500 }
   belongs_to :chef
   validates :chef_id, presence: true
+  default_scope -> { order(updated_at: :desc) }
 end
