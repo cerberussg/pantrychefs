@@ -56,7 +56,7 @@
       var directions = $("#directions");
       var counter     = $("#counter2");
       var max_length  = counter.data("maximum-length");
-
+      
       directions.keyup(function() {
           counter.text(max_length - $(this).val().length);
       });
