@@ -2,7 +2,7 @@
 <div align="center">
   <%= will_paginate %>
   <% @chefs.each do |chef| %>
-    <% if !chef.admin? %>
+    <% if chef.chefname != "admin" %>
       <ul class="listing">
         <div class="row">
           <div class="well col-md-4 col-md-offset-4">
