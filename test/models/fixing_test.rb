@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class IngreddientTest < ActiveSupport::TestCase
+class FixingTest < ActiveSupport::TestCase
   
   def setup
-    @ingredient = Ingredient.create!(name: "Chicken")
+    @ingredient = Fixing.create!(name: "Chicken")
   end
   
   test "should be valid" do
@@ -26,7 +26,7 @@ class IngreddientTest < ActiveSupport::TestCase
   end
   
   test "Uniqueness of the ingredient" do
-    @ingredient2 = Ingredient.new(name: "Chicken")
+    @ingredient2 = Fixing.new(name: "Chicken")
     assert_not @ingredient2.valid?
   end
   
