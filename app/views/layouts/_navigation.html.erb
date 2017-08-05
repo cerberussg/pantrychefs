@@ -16,6 +16,7 @@
       <ul class="nav navbar-nav">
         <li><%= link_to "Chefs", chefs_path %></li>
         <li><%= link_to "All Recipes", recipes_path %></li>
+        <!-- Only allows logged in users to view Recipe Actions -->
           <% if logged_in? %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recipes <span class="caret"></span></a>
@@ -30,6 +31,17 @@
               </ul>
             </li>
           <% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ingredients <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "All Ingredients", fixings_path %></li>
+              <% Fixing.all.each do |fixing| %>
+                <li><%= link_to fixing.name.capitalize, fixing_path(fixing) %></li>
+              <% end %>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "New Ingredient", new_fixing_path %></li>
+            </ul>
+          </li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -40,7 +52,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_chef.chefname.capitalize %>'s Profile <%= "admin" if current_chef.admin? %><span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_chef.chefname.capitalize %>'s Profile <%= "admin" if current_chef.admin? %> <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><%= link_to "View your profile", chef_path(current_chef) %></li>
               <li><%= link_to "Edit your profile", edit_chef_path(current_chef) %></li>

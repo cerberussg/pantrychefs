@@ -45,11 +45,9 @@
     var ingredients = $("#ingredients");
     var counter     = $("#counter");
     var max_length  = counter.data("maximum-length");
-
-    ingredients.keyup(function() {
-        counter.text(max_length - $(this).val().length);
-    });
-
+      ingredients.keyup(function() {
+          counter.text(max_length - $(this).val().length);
+      });
   });
   
   $(document).ready(function() {
