@@ -8,7 +8,7 @@
             <li class="chef-title"><%= link_to ing.name.capitalize, fixing_path(ing) %></li>
             <li><small><%= pluralize(ing.recipes.count, "recipe") if ing.recipes %></small></li>
             <% if logged_in? && current_chef.admin? %>
-              <li><%= link_to "Edit this ingredient", fixing_path(ing) %></li>
+              <li><%= link_to "Edit this ingredient", edit_fixing_path(ing) %></li>
             <% end %>
           </div>
         </div>

@@ -6,6 +6,10 @@
   <hr />
   <h4 class="center directions"><strong>Cooking Instructions: </strong></h4>
   <%= simple_format(@recipe.directions) %>
+  <hr />
+  <% if @recipe.fixings.any? %>
+    <p>Ingredient Tags: <%= render @recipe.fixings %></p>
+  <% end %>
   <div class="pull-right">
     <p class="center">
       <em>Created By:</em>

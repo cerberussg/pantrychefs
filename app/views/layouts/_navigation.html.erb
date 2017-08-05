@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "Good Eats", root_path, class: "navbar-brand", id: "logo" %>
+      <%= link_to "Pantry Chefs", root_path, class: "navbar-brand", id: "logo" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -38,8 +38,10 @@
               <% Fixing.all.each do |fixing| %>
                 <li><%= link_to fixing.name.capitalize, fixing_path(fixing) %></li>
               <% end %>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to "New Ingredient", new_fixing_path %></li>
+              <% if logged_in? && current_chef.admin? %>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to "New Ingredient", new_fixing_path %></li>
+              <% end %>
             </ul>
           </li>
       </ul>
