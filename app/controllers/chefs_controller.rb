@@ -13,8 +13,8 @@ class ChefsController < ApplicationController
   def create
     @chef= Chef.new(chef_params)
     if @chef.save
-      session[:cehf_id] = @chef.id
-      flash[:success] = "Welcome #{@chef.chefname} to Good Eats App!"
+      session[:chef_id] = @chef.id
+      flash[:success] = "Welcome #{@chef.chefname} to Pantry Chefs"
       redirect_to chef_path(@chef)
     else
       render 'new'
