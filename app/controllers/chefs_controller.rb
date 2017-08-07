@@ -14,6 +14,7 @@ class ChefsController < ApplicationController
     @chef= Chef.new(chef_params)
     if @chef.save
       session[:chef_id] = @chef.id
+      cookies.signed[:chef_id] = @chef.id
       flash[:success] = "Welcome #{@chef.chefname} to Pantry Chefs"
       redirect_to chef_path(@chef)
     else
@@ -46,22 +47,22 @@ class ChefsController < ApplicationController
   end
   
   private
-  
+  ## To create a chef users must meet the requirements to create account
   def chef_params
     params.require(:chef).permit(:chefname, :email, :password, :password_confirmation)
   end
-  
+  ## Useful to set the @chef variable to chef by id
   def set_chef
     @chef = Chef.find(params[:id])
   end
-  
+  ## Prevents other users from editing other Chefs reicpes, Admin can edit all
   def require_same_user
     if current_chef != @chef and !current_chef.admin?
       flash[:danger] = "You can only eidt or delete your own account"
       redirect_to chefs_path
     end
   end
-  
+  ## Validates whether user is admin
   def require_admin
     if logged_in? && !current_chef.admin?
       flash[:danger] = "Only admin users can perform that action"
