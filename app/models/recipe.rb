@@ -13,9 +13,13 @@ class Recipe < ApplicationRecord
     if term
       if where('lower(name) LIKE ?', "%#{term}%")
         where('lower(name) LIKE ?', "%#{term}%").paginate(page: page, per_page: 10)
+      else
+        paginate(page: page, per_page: 10)
       end
-      if where('lower(fixings) LIKE ?', "%#{term}%")
-        where('lower(fixings) LIKE ?', "%#{term}%").paginate(page: page, per_page: 10)
+      if where('lower(recipe_fixings) LIKE ?', "%#{term}%")
+        where('lower(recipe_fixings) LIKE ?', "%#{term}%").paginate(page: page, per_page: 10)
+      else
+        paginate(page: page, per_page: 10)
       end
     else
       paginate(page: page, per_page: 10)
