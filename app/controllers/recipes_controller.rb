@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_action :require_same_user, only: [:edit, :update, :destroy]
   
   def index
-      @recipes = Recipe.search(params[:term]), params[:page]
+      @recipes = Recipe.search(params[:term], params[:page])
   end
   
   def show
