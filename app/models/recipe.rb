@@ -11,7 +11,7 @@ class Recipe < ApplicationRecord
   
   def self.search(term, page)
     if term
-      where('name MATCH ?', "%#{term}%").paginate(page: page, per_page: 10)
+      where('lower(name) LIKE ?', "%#{term}%").paginate(page: page, per_page: 10)
     else
       paginate(page: page, per_page: 10)
     end
