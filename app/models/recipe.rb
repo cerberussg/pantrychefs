@@ -11,7 +11,7 @@ class Recipe < ApplicationRecord
   
   def self.search(term, page)
     if term
-      where('lower(name) ILIKE ? OR lower(ingredients) ILIKE ? OR lower(fixings) ILIKE ?', "%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%").paginate(page: page, per_page: 10)
+      where("lower(name) ILIKE ? OR lower(ingredients) ILIKE ? OR lower(fixings) ILIKE ?", "%#{term}%", "%#{term}%", "%#{term}%").paginate(page: page, per_page: 10)
     else
       paginate(page: page, per_page: 10)
     end
