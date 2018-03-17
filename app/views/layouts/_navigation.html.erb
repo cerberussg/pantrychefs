@@ -46,7 +46,7 @@
             </ul>
           </li>
       </ul>
-      <%= form_tag(recipes_path, method: 'get', class: 'navbar-form navbar-left') do %>
+      <%= form_tag(recipes_path, method: :get, class: 'navbar-form navbar-left') do %>
       <%= search_field_tag :term, params[:term], class: 'form-control', placeholder: 'Search'  %>
       <%= submit_tag "Submit", class: 'btn btn-default', name: nil %>
       <% end %>
