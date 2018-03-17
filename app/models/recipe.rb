@@ -9,10 +9,11 @@ class Recipe < ApplicationRecord
   has_many :fixings, through: :recipe_fixings
   has_many :comments, dependent: :destroy
   
-  def self.search(term)
-  if term
-    where('name LIKE ?', "%#{term}%")
-  else
-    all
+  def self.search(term, page)
+    if term
+      where('name LIKE ?', "%#{term}%").paginate(page: params[:page], per_page: 10)
+    else
+      paginate(page: page, per_page: 10)
+    end
   end
 end
