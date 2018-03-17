@@ -47,7 +47,7 @@
           </li>
       </ul>
       <%= form_tag(recipes_path, method: 'get', class: 'navbar-form navbar-left') do %>
-      <%= search_field_tag :fixing_ids, nil, class: 'form-control', placeholder: 'Search'  %>
+      <%= search_field_tag :term, nil, class: 'form-control', placeholder: 'Search'  %>
       <%= submit_tag "Submit", class: 'btn btn-default', :name => nil %>
       <% end %>
       <ul class="nav navbar-nav navbar-right">

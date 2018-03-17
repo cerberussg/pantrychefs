@@ -4,7 +4,11 @@ class RecipesController < ApplicationController
   before_action :require_same_user, only: [:edit, :update, :destroy]
   
   def index
-    @recipes = Recipe.paginate(page: params[:page], per_page: 10)
+    @recipes = if params[:term]
+      Recipe.where('name LIKE ?', "%#{params[:term]}%")
+    else
+      @recipes = Recipe.paginate(page: params[:page], per_page: 10)
+    end
   end
   
   def show
@@ -55,7 +59,7 @@ class RecipesController < ApplicationController
     end
   
     def recipe_param
-      params.require(:recipe).permit(:name, :ingredients, :directions, fixing_ids: [])
+      params.require(:recipe).permit(:name, :ingredients, :directions, :term, fixing_ids: [])
     end
     
     def require_same_user
