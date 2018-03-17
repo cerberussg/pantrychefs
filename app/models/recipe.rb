@@ -8,4 +8,11 @@ class Recipe < ApplicationRecord
   has_many :recipe_fixings
   has_many :fixings, through: :recipe_fixings
   has_many :comments, dependent: :destroy
+  
+  def self.search(term)
+  if term
+    where('name LIKE ?', "%#{term}%")
+  else
+    all
+  end
 end
